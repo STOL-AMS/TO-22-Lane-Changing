@@ -1,0 +1,209 @@
+New features and bugfixes in the DriverModel.DLL API                (2017-09-15)
+====================================================
+(+ = new features, - = bugs that have been fixed, 
+ * = changes in the usage by VISSIM. 
+ Details about the fixes are in brackets.)
+
+(2017-09-15) [with VISSIM 10.00-02]
+------------
++ DriverModel.h + .cpp + DriverModelExample.cpp:
+  Optional transfer of values of user-defined vehicle attributes:
+  New types DRIVER_DATA_USE_UDA, DRIVER_DATA_VEH_UDA and DRIVER_DATA_NVEH_UDA.
+  Optional transfer of values for *all* nearby vehicles found according to the
+  driving behavior parameters. New type DRIVER_DATA_WANTS_ALL_NVEHS.
+  Option to allow multithreaded simulation runs. 
+  New type DRIVER_DATA_ALLOW_MULTITHREADING.
+
+(2017-03-21) [with VISSIM 9.00-07 + 10.00]
+------------
++ DriverModel.h + .cpp + DriverModelExample.cpp:
+  New types DRIVER_DATA_VEH_Z_COORDINATE and DRIVER_DATA_VEH_REAR_Z_COORDINATE.
+
+(2016-12-14) [with VISSIM 9.00-05 + 10.00]
+------------
++ DriverModel.h + .cpp + DriverModelExample.cpp:
+  New types DRIVER_DATA_VEH_INTAC_STATE, DRIVER_DATA_VEH_INTAC_TARGET_TYPE,
+  DRIVER_DATA_VEH_INTAC_TARGET_ID, DRIVER_DATA_VEH_INTAC_HEADWAY,
+  DRIVER_DATA_NVEH_TYPE, DRIVER_DATA_USE_INTERNAL_MODEL.
++ DriverModel.cpp does now cause Vissim to handle the vehicles completely on its
+  own with the internal models. (Previously, the limitation of the change of
+  acceleration used in the internal model was not applied even when the driver 
+  model DLL passed back the acceleration suggested by Vissim.)
+
+(2016-08-23) [with VISSIM 8.00-13 + 9.00-03]
+------------
++ DriverModel.h:
+  Missing definitions of DRIVER_DATA_VEH_REAR_X_COORDINATE and
+  DRIVER_DATA_VEH_REAR_Y_COORDINATE added. 
+  (Not added to DriverModel.cpp because these are optional.)
+
+(2014-07-29) [with VISSIM 6.00-20 + 7.00]
+------------
++ DriverModelExample.cpp:
+  Alternative version of DriverModel.cpp which contains its own very simple 
+  car following model.
+
+(2013-08-08) [with VISSIM 6.00-02]
+------------
++ DriverModel.cpp:
+  Back to default version which simply returns Vissim's suggestion.
+* DriverModel.vcproj replaced by DriverModel.vcxproj
+  Switched project file example to Visual Studio 10.
+
+(2012-08-28) [with VISSIM 5.40-06]
+------------
++ DriverModel.cpp:
+  Contains a very simple car following model as an example.
++ DriverModel.vxproj:
+  Updated to Visual Studio 8.0 (2005)
+
+(2010-07-29) [with VISSIM 5.20-11]
+------------
++ New Interface_Description.pdf replacing DriverModel.txt 
+  (saying VISSIM 5.30 but valid for 5.20-11, too).
++ DriverModel.h + .cpp:
+  New type code:
+  DRIVER_DATA_PARAMETERFILE.
+  Some comments improved.
+* VISSIM: 
+  All type codes added since 2005-05-24 are treated as optional, so there are 
+  no error messages anymore about values which cannot be set or retrieved.
+
+(2010-06-16) [released with VISSIM 5.20-10]
+------------
++ DriverModel.h + .cpp (still old format):
+  New type codes:
+  DRIVER_DATA_STATUS, DRIVER_DATA_STATUS_DETAILS.
++ DriverModel.cpp:
+  DriverModelSetValue() handles DRIVER_DATA_VEH_ACTIVE_LANE_CHANGE and 
+  DRIVER_DATA_VEH_REL_TARGET_LANE without returning zero.
+
+(2010-02-17) [since VISSIM 5.20-07]
+------------
+* VISSIM:
+  DRIVER_DATA_STATUS and DRIVER_DATA_STATUS_DETAILS are treated as optional now.
+
+(2010-01-14) [since VISSIM 5.20-06]
+------------
+* VISSIM:
+  DRIVER_DATA_VEH_DESTINATION_LINK, DRIVER_DATA_VEH_REAR_X_COORDINATE and 
+  DRIVER_DATA_VEH_REAR_Y_COORDINATE are treated as optional now.
+
+(2009-12-11) [since VISSIM 5.20-05]
+------------
+* VISSIM:
+  DRIVER_DATA_PARAMETERFILE is treated as optional now.
+* VISSIM:
+  DRIVER_DATA_LINK_SEGMENT_UP_RIGHT_X, DRIVER_DATA_LINK_SEGMENT_UP_RIGHT_Y,
+  DRIVER_DATA_LINK_SEGMENT_UP_LEFT_X, DRIVER_DATA_LINK_SEGMENT_UP_LEFT_Y,
+  DRIVER_DATA_LINK_SEGMENT_DOWN_RIGHT_X, DRIVER_DATA_LINK_SEGMENT_DOWN_RIGHT_Y,
+  DRIVER_DATA_LINK_SEGMENT_DOWN_LEFT_X, DRIVER_DATA_LINK_SEGMENT_DOWN_LEFT_Y,
+  DRIVER_DATA_SIGNAL_HEAD_POS_RIGHT_X, DRIVER_DATA_SIGNAL_HEAD_POS_RIGHT_Y,
+  DRIVER_DATA_SIGNAL_HEAD_POS_LEFT_X, DRIVER_DATA_SIGNAL_HEAD_POS_LEFT_Y
+  are not used anymore.
+
+(2008-12-23) [since VISSIM 5.10-06]
+------------
+* VISSIM:
+  DRIVER_DATA_USES_PEDESTRIAN_POLYGONS and DRIVER_DATA_VEH_LEAVES_NETWORK
+  are not used anymore.
+
+(2007-09-19) [since VISSIM 5.00-00]
+------------
+* VISSIM:
+  The DriverModel.DLL interface is not used anymore for the Pedestrian Module.
+  Support for DRIVER_DATA_USES_PEDESTRIAN_POLYGONS has been discontinued.
+* VISSIM:
+  DRIVER_DATA_VEH_Z_COORDINATE, DRIVER_DATA_VEH_HEIGHT,
+  DRIVER_DATA_VEH_REAR_Z_COORDINATE and DRIVER_DATA_PEDESTRIAN_POLYGON_*
+  are not used anymore.
+
+(2007-04-12) [since 4.30-01]
+------------
+* VISSIM:
+  DRIVER_DATA_VEH_REAR_X_COORDINATE, DRIVER_DATA_VEH_REAR_Y_COORDINATE are
+  used even if DriverModelGetValue (DRIVER_DATA_USES_PEDESTRIAN_POLYGONS, ...) 
+  set *long_value to 0, i.e. for lane-based driver models.
+
+(2007-02-06) [not externally released]
+------------     
++ DriverModel.h + .cpp:
+  New type code: 
+  DRIVER_DATA_VEH_REAR_Z_COORDINATE 
+  (only used with DRIVER_DATA_USES_PEDESTRIAN_POLYGONS).
+  
+(2006-11-30) [not externally released] 
+------------     
++ DriverModel.h + .cpp:
+  New type codes:
+  DRIVER_DATA_STATUS, DRIVER_DATA_STATUS_DETAILS.
++ DriverModel.cpp:
+  DriverModelGetValue() and DriverModelSetValue() must return 1 to almost
+  all calls (even with the new type codes added after 2005-05-24) 
+  to prevent VISSIM from stopping the simulation run with the error message 
+  "Could not send/retrieve ... to/from driver model"!
+
+(2006-10-20) [not externally released]
+------------     
++ DriverModel.h + .cpp:
+  New type code: 
+  DRIVER_DATA_VEH_HEIGHT 
+  (only used with DRIVER_DATA_USES_PEDESTRIAN_POLYGONS).
+  
+(2006-09-21) [not externally released]
+------------     
++ DriverModel.h + .cpp:
+  New type code: 
+  DRIVER_DATA_VEH_Z_COORDINATE 
+  (only used with DRIVER_DATA_USES_PEDESTRIAN_POLYGONS). 
+
+(2006-09-20) [not externally released]
+------------     
++ DriverModel.h + .cpp:
+  DRIVER_DATA_SETS_XY_COORDINATES replaced by DRIVER_DATA_USES_PEDESTRIAN_POLYGONS.
+  New type codes: 
+  DRIVER_DATA_PEDESTRIAN_POLYGON_*
+  (only used with DRIVER_DATA_USES_PEDESTRIAN_POLYGONS). 
+* VISSIM:
+  DRIVER_DATA_LINK_SEGMENT_UP_RIGHT_X, DRIVER_DATA_LINK_SEGMENT_UP_RIGHT_Y,
+  DRIVER_DATA_LINK_SEGMENT_UP_LEFT_X, DRIVER_DATA_LINK_SEGMENT_UP_LEFT_Y,
+  DRIVER_DATA_LINK_SEGMENT_DOWN_RIGHT_X, DRIVER_DATA_LINK_SEGMENT_DOWN_RIGHT_Y,
+  DRIVER_DATA_LINK_SEGMENT_DOWN_LEFT_X, DRIVER_DATA_LINK_SEGMENT_DOWN_LEFT_Y,
+  DRIVER_DATA_SIGNAL_HEAD_POS_RIGHT_X, DRIVER_DATA_SIGNAL_HEAD_POS_RIGHT_Y,
+  DRIVER_DATA_SIGNAL_HEAD_POS_LEFT_X, DRIVER_DATA_SIGNAL_HEAD_POS_LEFT_Y
+  are passed to the driver model DLL if DriverModelGetValue 
+  (DRIVER_DATA_USES_PEDESTRIAN_POLYGONS, ...) set *long_value to 0!
+
+(2006-09-01) [since VISSIM 4.30-00, not externally released]
+------------     
++ DriverModel.h + .cpp:
+  New format (created from an internal database).
++ DriverModel.h + .cpp:
+  New type code:
+  DRIVER_DATA_PARAMETERFILE.
+* VISSIM: The name of the DLL and a parameterfile can be selected for each
+  vehicle type.
+
+(2005-11-09) [not externally released]
+------------     
++ DriverModel.h + .cpp:
+  New type codes:
+  DRIVER_DATA_VEH_DESTINATION_LINK, DRIVER_DATA_SETS_XY_COORDINATES,
+  DRIVER_DATA_VEH_LEAVES_NETWORK, 
+  DRIVER_DATA_VEH_REAR_X_COORDINATE, DRIVER_DATA_VEH_REAR_Y_COORDINATE, 
+  DRIVER_DATA_LINK_SEGMENT_UP_RIGHT_X, DRIVER_DATA_LINK_SEGMENT_UP_RIGHT_Y,
+  DRIVER_DATA_LINK_SEGMENT_UP_LEFT_X, DRIVER_DATA_LINK_SEGMENT_UP_LEFT_Y,
+  DRIVER_DATA_LINK_SEGMENT_DOWN_RIGHT_X, DRIVER_DATA_LINK_SEGMENT_DOWN_RIGHT_Y,
+  DRIVER_DATA_LINK_SEGMENT_DOWN_LEFT_X, DRIVER_DATA_LINK_SEGMENT_DOWN_LEFT_Y,
+  DRIVER_DATA_SIGNAL_HEAD_POS_RIGHT_X, DRIVER_DATA_SIGNAL_HEAD_POS_RIGHT_Y,
+  DRIVER_DATA_SIGNAL_HEAD_POS_LEFT_X, DRIVER_DATA_SIGNAL_HEAD_POS_LEFT_Y.  
++ DriverModel.h + .cpp:
+  DRIVER_DATA_VEH_TURNING_INDICATOR is used by DriverModelGetValue(), too.
+  DRIVER_DATA_VEH_X_COORDINATE and DRIVER_DATA_VEH_Y_COORDINATE are
+  used by DriverModelGetValue(), too, if DriverModelGetValue 
+  (DRIVER_DATA_SETS_XY_COORDINATES, ...) set *long_value to 1.
+
+(2005-05-24)
+------------     
++ DriverModel.h: 
+  Comments for index values for DRIVER_DATA_NVEH_ values improved.
